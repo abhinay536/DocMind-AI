@@ -1,8 +1,9 @@
 services:
-  # 1. FastAPI Backend Service
+  # 1. FastAPI Backend Service (100% Free Tier)
   - type: web
     name: docmind-backend
     env: python
+    plan: free
     buildCommand: "pip install --default-timeout=1000 --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu torch && pip install --no-cache-dir -r backend/requirements.txt"
     startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT --app-dir backend"
     envVars:
@@ -13,10 +14,11 @@ services:
       - key: SECRET_KEY
         generateValue: true
 
-  # 2. React Frontend Service
+  # 2. React Frontend Service (100% Free Tier)
   - type: web
     name: docmind-frontend
     env: static
+    plan: free
     buildCommand: "cd frontend && npm install && npm run build"
     staticPublishPath: "./frontend/dist"
     routes:
@@ -25,8 +27,9 @@ services:
         destination: "/index.html"
 
 databases:
-  # 3. Managed PostgreSQL Database
+  # 3. Managed PostgreSQL Database (100% Free Tier)
   - name: docmind-postgres
     databaseName: docmind_db
     user: docmind_user
+    plan: free
 
