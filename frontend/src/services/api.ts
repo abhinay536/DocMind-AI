@@ -1,12 +1,21 @@
-import axios from 'axios';
-import { User, Document, Conversation, SystemStatus } from '../types';
+import axios from "axios";
+import { User, Document, Conversation, SystemStatus } from "../types";
+
+const getBaseURL = (): string => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl && typeof envUrl === "string" && envUrl.trim() !== "") {
+    const cleanUrl = envUrl.trim().replace(/\/$/, "");
+    return cleanUrl.endsWith("/api") ? cleanUrl : `${cleanUrl}/api`;
+  }
+  return "/api";
+};
 
 const API = axios.create({
-  baseURL: '/api',
+  baseURL: getBaseURL(),
 });
 
 API.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -15,22 +24,22 @@ API.interceptors.request.use((config) => {
 
 export const authAPI = {
   login: async (email: string, password: string) => {
-    const res = await API.post('/auth/login', { email, password });
+    const res = await API.post("/auth/login", { email, password });
     return res.data;
   },
   register: async (email: string, password: string, full_name?: string) => {
-    const res = await API.post('/auth/register', { email, password, full_name });
+    const res = await API.post("/auth/register", { email, password, full_name });
     return res.data;
   },
   me: async () => {
-    const res = await API.get<User>('/auth/me');
+    const res = await API.get<User>("/auth/me");
     return res.data;
   },
 };
 
 export const documentAPI = {
   list: async () => {
-    const res = await API.get<Document[]>('/documents');
+    const res = await API.get<Document[]>("/documents");
     return res.data;
   },
   get: async (id: number) => {
@@ -39,9 +48,9 @@ export const documentAPI = {
   },
   upload: async (file: File) => {
     const formData = new FormData();
-    formData.append('file', file);
-    const res = await API.post<Document>('/documents/upload', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+    formData.append("file", file);
+    const res = await API.post<Document>("/documents/upload", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
     return res.data;
   },
@@ -59,11 +68,11 @@ export const chatAPI = {
     groq_api_key?: string;
     gemini_api_key?: string;
   }) => {
-    const res = await API.post('/chat/query', payload);
+    const res = await API.post("/chat/query", payload);
     return res.data;
   },
   listConversations: async () => {
-    const res = await API.get<Conversation[]>('/chat/conversations');
+    const res = await API.get<Conversation[]>("/chat/conversations");
     return res.data;
   },
   getConversation: async (id: number) => {
@@ -77,9 +86,10 @@ export const chatAPI = {
 
 export const settingsAPI = {
   getStatus: async () => {
-    const res = await API.get<SystemStatus>('/settings/status');
+    const res = await API.get<SystemStatus>("/settings/status");
     return res.data;
   },
 };
 
 export default API;
+
