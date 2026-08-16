@@ -9,6 +9,19 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.environ["TRANSFORMERS_VERBOSITY"] = "error"
 os.environ["PYTHONWARNINGS"] = "ignore"
 
+# PyTorch & CPU Threading Memory Optimizations for 512MB RAM constraints
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+
+try:
+    import torch
+    torch.set_num_threads(1)
+except Exception:
+    pass
+
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "DocMind AI Multi-Modal Platform"
@@ -32,9 +45,9 @@ class Settings(BaseSettings):
     UPLOADS_DIR: str = os.path.join(DATA_DIR, "uploads")
     IMAGES_DIR: str = os.path.join(DATA_DIR, "images")
 
-    # Models
+    # Models (Optimized for 512MB RAM low-footprint inference)
     EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
-    LLM_MODEL: str = os.getenv("LLM_MODEL", "google/flan-t5-base")
+    LLM_MODEL: str = os.getenv("LLM_MODEL", "google/flan-t5-small")
 
     # OCR Path
     DEFAULT_TESSERACT: str = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
@@ -51,3 +64,4 @@ settings = Settings()
 os.makedirs(settings.DATA_DIR, exist_ok=True)
 os.makedirs(settings.UPLOADS_DIR, exist_ok=True)
 os.makedirs(settings.IMAGES_DIR, exist_ok=True)
+
