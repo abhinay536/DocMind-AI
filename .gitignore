@@ -1,0 +1,43 @@
+# Environment & secrets
+.env
+.env.local
+.venv/
+venv/
+ENV/
+
+# Python & testing cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Databases & local state
+*.db
+*.sqlite
+*.sqlite3
+docmind.db
+
+# Dynamic upload data & indices
+data/uploads/*
+data/images/*
+backend/data/uploads/*
+backend/data/images/*
+!data/uploads/.gitkeep
+!backend/data/uploads/.gitkeep
+*.pkl
+*.faiss
+
+# Node.js & Vite build artifacts
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+.DS_Store
+
+# IDE configuration
+.vscode/
+.idea/
+

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is the primary objective of the financial policy report?",
+    "ground_truth_keywords": ["objective", "financial", "policy", "growth"],
+    "target_page": 1
+  },
+  {
+    "id": 2,
+    "question": "What was the total GDP growth rate mentioned in the tables?",
+    "ground_truth_keywords": ["gdp", "growth", "rate", "percent", "table"],
+    "target_page": 2
+  },
+  {
+    "id": 3,
+    "question": "What are the key expenditure figures for infrastructure?",
+    "ground_truth_keywords": ["expenditure", "infrastructure", "budget", "million"],
+    "target_page": 3
+  },
+  {
+    "id": 4,
+    "question": "What OCR text was extracted from Figure 1 chart?",
+    "ground_truth_keywords": ["chart", "figure", "ocr", "graph", "percentage"],
+    "target_page": 4
+  },
+  {
+    "id": 5,
+    "question": "What is the projected inflation rate for the next fiscal year?",
+    "ground_truth_keywords": ["inflation", "projected", "fiscal", "rate"],
+    "target_page": 5
+  },
+  {
+    "id": 6,
+    "question": "Summarize the risk factors highlighted in Section 3.",
+    "ground_truth_keywords": ["risk", "factors", "market", "volatility"],
+    "target_page": 6
+  },
+  {
+    "id": 7,
+    "question": "What is the net revenue reported in Table 2?",
+    "ground_truth_keywords": ["net", "revenue", "table", "reported"],
+    "target_page": 7
+  },
+  {
+    "id": 8,
+    "question": "Which regulatory framework governs compliance?",
+    "ground_truth_keywords": ["regulatory", "framework", "compliance", "policy"],
+    "target_page": 8
+  },
+  {
+    "id": 9,
+    "question": "What are the operational expenses listed in the budget summary?",
+    "ground_truth_keywords": ["operational", "expenses", "budget", "summary"],
+    "target_page": 9
+  },
+  {
+    "id": 10,
+    "question": "What key recommendations are provided in the executive conclusion?",
+    "ground_truth_keywords": ["recommendations", "conclusion", "strategy", "roadmap"],
+    "target_page": 10
+  }
+]
